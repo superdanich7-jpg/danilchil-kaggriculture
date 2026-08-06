@@ -1,4 +1,4 @@
-"""Kaggriculture v4: carrot loop with farm hands coordination."""
+"""Kaggriculture v5: carrot loop with farm hands + batch DROP."""
 
 CROPS = {
     "CARROT": {"seed": 20, "first_yield_day": 2, "max_yield_day": 3, "max_yield": 4},
@@ -6,6 +6,7 @@ CROPS = {
 
 MAX_HANDS = 4
 MIN_MONEY_FOR_HIRE = 500
+DROP_THRESHOLD = 8
 
 def _farm(o): return o["farms"][o["player"]]
 def _priv(o): return o.get("private", {}) or {}
@@ -101,9 +102,10 @@ def agent(obs):
 
         for i, u_pos in enumerate(units):
             u_inv = invs[i] if i < len(invs) else {}
+            inv_total = sum(u_inv.values()) if u_inv else 0
 
-            # If unit has inventory -> go to shed and DROP
-            if u_inv:
+            # BATCH DROP: go to shed only when inventory >= threshold OR no tasks left
+            if u_inv and inv_total >= DROP_THRESHOLD:
                 if _shed_adjacent(u_pos, board_size):
                     actions[i] = ["DROP"]
                 else:
@@ -135,8 +137,14 @@ def agent(obs):
                 else:
                     actions[i] = _step(u_pos, (tx, ty)) or ["PASS"]
             else:
-                # No tasks left - idle
-                actions[i] = ["PASS"]
+                # No tasks left - if have inventory, go DROP; else idle
+                if u_inv:
+                    if _shed_adjacent(u_pos, board_size):
+                        actions[i] = ["DROP"]
+                    else:
+                        actions[i] = _step(u_pos, _nearest_shed(u_pos, board_size)) or ["PASS"]
+                else:
+                    actions[i] = ["PASS"]
 
         return {
             "farmer": actions[0],
