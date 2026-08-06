@@ -1,4 +1,4 @@
-"""Kaggriculture v5: carrot loop with farm hands + land expansion."""
+"""Kaggriculture v4: carrot loop with farm hands coordination."""
 
 CROPS = {
     "CARROT": {"seed": 20, "first_yield_day": 2, "max_yield_day": 3, "max_yield": 4},
@@ -6,10 +6,6 @@ CROPS = {
 
 MAX_HANDS = 4
 MIN_MONEY_FOR_HIRE = 500
-LAND_ORDER = ["NE", "SW", "SE"]
-LAND_PRICES = [1000, 2000, 4000]
-MIN_MONEY_FOR_LAND = 1500
-LAND_DAY_LIMIT = 20
 
 def _farm(o): return o["farms"][o["player"]]
 def _priv(o): return o.get("private", {}) or {}
@@ -88,12 +84,6 @@ def agent(obs):
         # Hire hands at start of day
         if hour == 0 and f.get("hires_today", 0) < MAX_HANDS and f["money"] > MIN_MONEY_FOR_HIRE:
             market.append(["HIRE"])
-
-        # Buy land: next unlocked quadrant from LAND_ORDER
-        unlocked = f.get("unlocked_quadrants", [])
-        n_extra = len(unlocked) - 1  # NW always there
-        if day < LAND_DAY_LIMIT and n_extra < len(LAND_ORDER) and f["money"] > MIN_MONEY_FOR_LAND:
-            market.append(["BUY_LAND"])
 
         # === COORDINATION ===
         # Units: [main farmer] + [hands]
