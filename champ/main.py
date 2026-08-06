@@ -1,15 +1,11 @@
-"""Kaggriculture v5: carrot loop with farm hands + land expansion v2."""
+"""Kaggriculture v4: carrot loop with farm hands coordination."""
 
 CROPS = {
     "CARROT": {"seed": 20, "first_yield_day": 2, "max_yield_day": 3, "max_yield": 4},
 }
 
-MAX_HANDS_BASE = 4
-MAX_HANDS_EXPANDED = 6
+MAX_HANDS = 4
 MIN_MONEY_FOR_HIRE = 500
-MIN_MONEY_FOR_LAND = 3000
-LAND_DAY_MIN = 8
-LAND_DAY_MAX = 20
 
 def _farm(o): return o["farms"][o["player"]]
 def _priv(o): return o.get("private", {}) or {}
@@ -74,10 +70,6 @@ def agent(obs):
         board_size = len(f["tiles"])
         shed_adj = _shed_adjacent(pos, board_size)
 
-        # Determine max hands based on unlocked quadrants
-        n_unlocked = len(f.get("unlocked_quadrants", []))
-        max_hands = MAX_HANDS_EXPANDED if n_unlocked > 1 else MAX_HANDS_BASE
-
         # === MARKET ORDERS ===
         market = []
 
@@ -90,13 +82,8 @@ def agent(obs):
             market.append(["BUY_SEED", "CARROT", 2 - seeds.get("CARROT", 0)])
 
         # Hire hands at start of day
-        if hour == 0 and f.get("hires_today", 0) < max_hands and f["money"] > MIN_MONEY_FOR_HIRE:
+        if hour == 0 and f.get("hires_today", 0) < MAX_HANDS and f["money"] > MIN_MONEY_FOR_HIRE:
             market.append(["HIRE"])
-
-        # Buy land: only when money > 3000 and day in [8, 20]
-        n_extra = n_unlocked - 1  # NW always there
-        if LAND_DAY_MIN <= day <= LAND_DAY_MAX and n_extra < 3 and f["money"] > MIN_MONEY_FOR_LAND:
-            market.append(["BUY_LAND"])
 
         # === COORDINATION ===
         # Units: [main farmer] + [hands]
@@ -115,7 +102,7 @@ def agent(obs):
         for i, u_pos in enumerate(units):
             u_inv = invs[i] if i < len(invs) else {}
 
-            # HIGH PRIORITY: unit with inventory -> go to shed and DROP
+            # If unit has inventory -> go to shed and DROP
             if u_inv:
                 if _shed_adjacent(u_pos, board_size):
                     actions[i] = ["DROP"]
