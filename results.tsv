@@ -28,3 +28,4 @@ date	item	wr_vs_champ	delta	unsold	err	verdict
 2026-09-07	iter42-replant-unblocked	offline	LB-pending	0	0.00	v57: peak20+hire10+seeds16. Kirito83 forensics: replant was blocked by limit. Offline vs iter41 parity wr0.40 -928; weak pool +87786/+84954/+52610 wr1.00.
 2026-09-08	iter43-melon-cutoff-13	offline	LB-pending	0	0.00	v61: melon cutoff d13 (all 3 fresh losers drop melon after 1st harvest). Offline parity wr0.45 -32/30. iter42 LB 519.7 vs iter41 517.0.
 2026-09-08	iter46-sell-all-byproducts	offline	LB-pending	0	0.00	iter45 + sell all fert/wool/milk	v76
+2026-09-09	iter47-tape-router	LB	600 start, +4/win, record climb	0	0.00	vs top10 tapes: 84 pct wr (SpaTaro 0.91, OtterVibe 0.85) on env 1.32.7 upgrade	pinned
