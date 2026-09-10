@@ -5,3 +5,26 @@ date	item	wr_vs_champ	delta	unsold	err	verdict
 2026-08-06	v5	1.00	+913	3	0.00	champion
 2026-08-08	v6	1.00	+23572	0	0.00	champion
 2026-08-08	v7	0.88	+2036	0	0.00	champion
+2026-08-09	v13	0.00	-29479	0	0.00	fail
+2026-08-09	v14	0.00	-29479	0	0.00	fail
+2026-08-09	v15	0.00	-30645	149	0.00	fail
+2026-08-09	v16	0.94	+1414	13	0.00	champion
+2026-08-09	v17	1.00	+30105	1778	0.00	champion
+2026-08-09	v18	1.00	+28160	594	0.00	champion
+2026-08-09	v19	1.00	+29580	0	0.00	champion
+
+2026-08-08	v12	0.00	-8678	0	0.00	fail
+2026-08-09	test_goose	N/A	N/A	N/A	N/A	env_limit
+2026-08-26	iter34-weed-dig	N/A	LB-pending	0	0.00	submitted (prev LB 481.1)
+2026-08-31	iter34-weed-dig	LB	+118.9 (481.1->600.0)	0	0.00	CHAMPION new-record
+2026-08-31	iter35-straw-engine	offline	dCoins 88.6k/83.6k/29.7k	0	0.00	submitted (quota bugfix + straw engine)
+2026-08-31	iter36-straw-dig16	offline	parity with champ (dCoins -99/40seeds); better vs v16 +46309	0	0.00	submitted
+2026-08-31	iter36-straw-dig16	LB	609.1 (vs iter35 556.0, +53) 4W/3L after 7 matches	0	0.00	new record - keep
+2026-08-31	iter38-replant-cycle	offline	parity with iter35 (wr 0.70, dCoins -245); straw d29: 23-27 (P1 done)	0	0.00	submitted
+2026-09-03	iter38-replant-cycle	LB	485.2 early (still settling, was 600 initial)	0	0.00	down - monitoring
+2026-09-03	iter39-hire12	offline	wr 0.93, dCoins +3506 vs iter35 (30seeds); d26 straw 10-16 (was 6-8)	0	0.00	submitted - one param change
+2026-09-03	iter40-straw-limit-15	offline	LB-pending	0	0.00	iter35 base + straw limit 15. Offline vs iter39: wr 0.07, dCoins -4837. Stable straw 15->8.
+2026-09-03	iter41-straw-limit-12	offline	LB-pending	0	0.00	v50 beats iter40 wr=0.93, dCoins=+4986. d29 money 62-65k.
+2026-09-07	iter42-replant-unblocked	offline	LB-pending	0	0.00	v57: peak20+hire10+seeds16. Kirito83 forensics: replant was blocked by limit. Offline vs iter41 parity wr0.40 -928; weak pool +87786/+84954/+52610 wr1.00.
+2026-09-08	iter43-melon-cutoff-13	offline	LB-pending	0	0.00	v61: melon cutoff d13 (all 3 fresh losers drop melon after 1st harvest). Offline parity wr0.45 -32/30. iter42 LB 519.7 vs iter41 517.0.
+2026-09-08	iter46-sell-all-byproducts	offline	LB-pending	0	0.00	iter45 + sell all fert/wool/milk	v76

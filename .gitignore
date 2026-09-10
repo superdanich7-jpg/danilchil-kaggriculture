@@ -1,0 +1,20 @@
+# Kaggle replays — слишком большие (797 MB), не коммитим
+replays/
+*.json
+
+# НО actions.json от yhay81 (5.5MB) нужен для его tape-агента — оставляем
+!public/yhay81_shop0909/actions.json
+
+# Кэши Python
+__pycache__/
+*.pyc
+
+# Логи и временные файлы
+*.log
+dbg_scan.log
+diagnostics.txt
+eval_v24.log
+debug_output*
+
+# KAGGLE_API_TOKEN — если появится
+.kaggle_credentials*

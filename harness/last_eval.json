@@ -1,34 +1,10 @@
 {
- "random": {
+ "file:bots/v16.py": {
   "wr": 1.0,
-  "delta": 1669.44,
+  "delta": 155163.6,
   "unsold": 0.0,
-  "ocoins": 4.8,
+  "ocoins": 29637.466666666667,
   "err": 0.0,
-  "sec": 1.9691497659683228
- },
- "starter": {
-  "wr": 0.0,
-  "delta": -1955.94,
-  "unsold": 0.0,
-  "ocoins": 3473.92,
-  "err": 0.0,
-  "sec": 1.6231975841522217
- },
- "file:bots/melon_maxxer.py": {
-  "wr": 0.0,
-  "delta": -4488.7,
-  "unsold": 0.0,
-  "ocoins": 6099.0,
-  "err": 0.0,
-  "sec": 1.6217944765090941
- },
- "file:bots/v0.py": {
-  "wr": 0.57,
-  "delta": 77.84,
-  "unsold": 0.0,
-  "ocoins": 1340.04,
-  "err": 0.0,
-  "sec": 2.0539947509765626
+  "sec": 4.0670299847920734
  }
 }
