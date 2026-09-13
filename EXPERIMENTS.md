@@ -548,3 +548,8 @@ BUY_ANIMAL ордер игнорируется средой. Животново�
 - ablation: deferral-only 0/20 -4993; topup-only 0/20 -1492. Both components individually harmful.
 - v81 rubber-band: verbatim tape while not 3k+ behind opponent money; defer+topup only when behind. Offline wr 0.53 +9 (parity, zero degradation when ahead).
 - SUBMITTED iter48. Next: watch LB, tune threshold if behind-branch fires; later opponent-model counter-tape selection.
+
+## 2026-09-13: iter48 growth check + iter47 aging
+- iter48 (rubber-band): wr 0.86 over last 29 (24W/4L/1T), wins +20k..+105k, losses all narrow (-322..-7030). Score 1518.5 and climbing; +30/win because rating still below true strength (Elo expectation).
+- iter47 (plain tape) late-phase wr 0.26: pool of Shop-Router clones hardened; losses are perfect mirrors decided by market jitter (herd17 hands11-13, same util%).
+- Conclusion: no new submit; let iter48 mature vs strong pool to test rubber-band where it matters.
