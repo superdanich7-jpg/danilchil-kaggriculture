@@ -1,10 +1,10 @@
 {
- "file:bots/opp_haodou.py": {
-  "wr": 1.0,
-  "delta": 62908.53333333333,
+ "file:champ/main.py": {
+  "wr": 0.525,
+  "delta": 9.0,
   "unsold": 0.0,
-  "ocoins": 49833.23333333333,
+  "ocoins": 90628.25,
   "err": 0.0,
-  "sec": 5.168374991416931
+  "sec": 6.752083361148834
  }
 }

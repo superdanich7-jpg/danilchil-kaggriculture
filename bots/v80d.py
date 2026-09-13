@@ -1196,7 +1196,7 @@ del agent
 _V230_HIST={}
 _V230_STATE={}
 _V230_REPORT=dict(_V228_REPORT,price_deferrals=0,forward_keeps=0,cow_topups=0,
-    cow_topup_declines=0,behind_turns=0)
+    cow_topup_declines=0)
 _V230_DEFER_GOODS={'STRAWBERRY','CARROT','TOMATO','WOOL','MILK','EGG','FERTILIZER'}
 
 
@@ -1221,12 +1221,6 @@ def _v230_adapt(obs,action,view,state):
     prices=obs['market']['prices']
     market=[list(order) for order in action.get('market',[])[:MAX_ORDERS]]
     money=int(obs['farms'][player]['money'])
-    # rubber-band: deviate only when meaningfully behind the opponent
-    _V230_REPORT['behind_turns']+=1
-    behind=money+3000<int(obs['farms'][1-player]['money'])
-    if not behind:
-        action=copy.deepcopy(action);action['market']=market
-        return action
     spending=any(order and order[0] in ('HIRE','BUY_LAND','BUY_PRODUCT','BUY_ANIMAL','BUY_SEED')
         for order in market)
     # 1) defer sales into a dumped market, never block our own planned spending.
@@ -1245,7 +1239,7 @@ def _v230_adapt(obs,action,view,state):
         market=kept
     # 2) cash-rich cow top-up: one cow every 3 days up to 3 extra animals.
     topup=state['topup']
-    if (12<=day<=20 and money>=4000 and topup['bought']<3 and day-topup['day']>=3
+    if (0 and 12<=day<=20 and money>=4000 and topup['bought']<3 and day-topup['day']>=3
             and not any(order and order[0] in ('BUY_ANIMAL','BUY_LAND') for order in market)
             and len(market)<MAX_ORDERS):
         animals=obs['farms'][player].get('animals')
