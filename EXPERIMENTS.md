@@ -543,3 +543,8 @@ BUY_ANIMAL ордер игнорируется средой. Животново�
 - champ vs haodou092 (biggest LB loss -213.5): 30 seeds wr=1.00 +62909. LB loss not reproducible offline.
 - tschinkel router: too slow (>15 min for 6 seeds) - timeout risk on Kaggle, deprioritized.
 - CONCLUSION: iter47 stays. LB losses are variance tails in mirror matches. Next lever: wait for rating equilibrium, or build runtime adaptive agent (variant B).
+## 2026-09-12: Variant B - rubber-band runtime layer (iter48)
+- v80 always-on (price-defer + cow-topup): LOSES mirror 0/20, -6556. Tape is a fine-tuned equilibrium; any deviation breaks timing.
+- ablation: deferral-only 0/20 -4993; topup-only 0/20 -1492. Both components individually harmful.
+- v81 rubber-band: verbatim tape while not 3k+ behind opponent money; defer+topup only when behind. Offline wr 0.53 +9 (parity, zero degradation when ahead).
+- SUBMITTED iter48. Next: watch LB, tune threshold if behind-branch fires; later opponent-model counter-tape selection.
