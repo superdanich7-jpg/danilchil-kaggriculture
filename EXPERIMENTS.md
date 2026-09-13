@@ -535,3 +535,11 @@ BUY_ANIMAL ордер игнорируется средой. Животново�
 "Животноводство невозможно" = НЕВЕРНО. Животноводство ВОЗМОЖНО, но не ПРИБЫЛЬНО.
 Чемпион — v9.
 
+
+## 2026-09-12: Round-robin tournament of 9 tapes
+- harness/roundrobin.py: 36 pairs x 3 seeds, in-process.
+- RESULT: champ/main.py wr=1.000 dCoins=+65063 (n=24) - strongest by huge margin.
+- All 8 LB-loss opponent tapes rank 2-9, best (umataro) only +2772.
+- champ vs haodou092 (biggest LB loss -213.5): 30 seeds wr=1.00 +62909. LB loss not reproducible offline.
+- tschinkel router: too slow (>15 min for 6 seeds) - timeout risk on Kaggle, deprioritized.
+- CONCLUSION: iter47 stays. LB losses are variance tails in mirror matches. Next lever: wait for rating equilibrium, or build runtime adaptive agent (variant B).
