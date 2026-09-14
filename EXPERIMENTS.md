@@ -570,3 +570,10 @@ BUY_ANIMAL ордер игнорируется средой. Животново�
 - LB reality: ymgaq 582 wr 0.47 (losses -26k), thirdfarm 788 wr 0.33 (-39k), mengfei 892 wr 0.67-0.73. Offline duels on 15 fixed seeds LIED: fresh top tapes are single-seed lucky sessions, not transferable economies.
 - v89 (fert in seat-lead + rubber 2000): parity-worse vs v83 (-1081/40). Rejected.
 - Strategy: rebuild on iter47/49 (our Policy architecture, 1830-1996). Tomorrow: seat-lead v4 experiments (depth by stock), mengfei-style timing learned into OUR advance_sales; 5 submits/day until 09-17, then freeze.
+
+## 2026-09-14 night: combined strategy (v90/v92)
+- tape_profiles: all 13 Shop-Router tapes = ONE economy (wheat132+herd+strawberry), differ only by target shops -> opponent-crop routing impossible inside family; combined strategy = runtime gates.
+- v83 beats iter47-clean 0.75 +1823/40: seat-lead family IS the strongest base; iter47 LB-lead is age-artefact (its late wr was 0.26).
+- v90: seat-lead gated by clone-detect (opp herd 12-20 at d10); verbatim vs foreign economies (v16 identical to plain).
+- v92: v90 + rich-mirror switch to mengfei tape (opp money > ours x1.3 at d10); neutral vs mirrors in offline test, activates vs strong clones on LB.
+- iter53 submit FAILED: kaggle auth expired. Need user to re-auth (kaggle auth login or new token). Next: submit v90 as iter53, then v92 as iter54.

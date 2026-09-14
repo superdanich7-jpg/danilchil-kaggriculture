@@ -166,7 +166,7 @@ def subtract_advanced_sales(action, state, step):
 
 def advance_sales(action, view, state, tape, step):
     """Bring eligible sales from our next planned action forward by one turn."""
-    next_step = step + (2 if getattr(state, "lead_shift", False) else 1)
+    next_step = step + 1
     if next_step > LAST_STEP or next_step % 72 == 0 or (step % 4 == 0 and step < 144):
         return
     planned = {}

@@ -166,7 +166,7 @@ def subtract_advanced_sales(action, state, step):
 
 def advance_sales(action, view, state, tape, step):
     """Bring eligible sales from our next planned action forward by one turn."""
-    next_step = step + (2 if getattr(state, "lead_shift", False) else 1)
+    next_step = step + 1
     if next_step > LAST_STEP or next_step % 72 == 0 or (step % 4 == 0 and step < 144):
         return
     planned = {}
@@ -177,16 +177,8 @@ def advance_sales(action, view, state, tape, step):
     already_selling = {order[1] for order in action["market"]
                        if order and order[0] == "SELL" and len(order) > 1}
     stock = projected_shed(action, view)
-    # V232 seat-aware: acting second -> lead the clone by one turn on bulk goods.
-    skip = ("WHEAT", "FERTILIZER")
-    lead = getattr(state, "lead_shift", False)
-    if lead and int(view.prices.get("WHEAT", 0)) > 2:
-        planned_wheat = planned.get("WHEAT", 0)
-        if planned_wheat > 0 and stock.get("WHEAT", 0) - planned_wheat >= 150:
-            planned["WHEAT"] = planned_wheat
-            skip = ("FERTILIZER",)
     for item in PRODUCTS:
-        if item in skip or item in already_selling:
+        if item in ("WHEAT", "FERTILIZER") or item in already_selling:
             continue
         quantity = min(stock.get(item, 0), planned.get(item, 0))
         if quantity <= 0 or int(view.prices.get(item, 0)) < 2:
@@ -223,7 +215,6 @@ class Policy:
         if state is None or step <= state.last_step:
             state = self.players[player] = DayState()
         state.last_step = step
-        state.lead_shift = player == 1
 
         if step == ROUTE_STEP:
             shops = observation["town"]["unlocked_shops"]
@@ -231,17 +222,6 @@ class Policy:
         if step == FINAL_PLAN_STEP:
             state.plan = 2
 
-        if step == 240 and player == 1:
-            # clone-detect at day 10: opponent herd size from visible farm
-            opp_farm = observation["farms"][1 - player]
-            herd = 0
-            rows = opp_farm.get("tiles") or []
-            for row in rows:
-                tiles = row if isinstance(row, list) else [row]
-                for tile in tiles:
-                    if isinstance(tile, dict) and tile.get("kind") in ("COOP", "PASTURE"):
-                        herd += 1
-            state.lead_shift = 12 <= herd <= 20
         view = FarmView(observation)
         tape = self.tapes[state.plan]
         action = copy.deepcopy(tape[step])
@@ -1201,99 +1181,3 @@ def agent(observation,configuration=None):
 
 
 agent.telemetry=_V228_REPORT
-
-# V230: price-adaptive market layer (runtime variant B).
-# The tape sells on a fixed calendar and ignores realized prices. In mirror
-# matches the opponent runs the same economy, so prices crash on joint sale
-# days; whoever sells into the higher prices keeps the margin. Layer:
-#   1) defer scheduled SELLs of goods whose price collapsed below 0.6x of the
-#      trailing median (opponent dump detected); goods wait in shed, the tape
-#      re-issues them later or the endgame liquidation clears them;
-#   2) if cash-rich mid-game, buy one extra cow per few days (passive milk
-#      income, replicates the herd-23 economy that beat the raw tape once).
-_V230_PARENT=agent
-del agent
-_V230_HIST={}
-_V230_STATE={}
-_V230_REPORT=dict(_V228_REPORT,price_deferrals=0,forward_keeps=0,cow_topups=0,
-    cow_topup_declines=0,behind_turns=0)
-_V230_DEFER_GOODS={'STRAWBERRY','CARROT','TOMATO','WOOL','MILK','EGG','FERTILIZER'}
-
-
-def _v230_median(values):
-    ordered=sorted(values);count=len(ordered)
-    return ordered[count//2] if count%2 else (ordered[count//2-1]+ordered[count//2])/2
-
-
-def _v230_hist(obs):
-    player=int(obs['player']);day=int(obs['step'])//24
-    hist=_V230_HIST.setdefault(player,{})
-    for good,price in obs['market']['prices'].items():
-        series=hist.setdefault(good,[])
-        if series and series[-1][0]==day:series[-1]=(day,int(price))
-        else:series.append((day,int(price)))
-    return hist
-
-
-def _v230_adapt(obs,action,view,state):
-    player=int(obs['player']);step=int(obs['step']);day=step//24
-    hist=_v230_hist(obs)
-    prices=obs['market']['prices']
-    market=[list(order) for order in action.get('market',[])[:MAX_ORDERS]]
-    money=int(obs['farms'][player]['money'])
-    # rubber-band: deviate only when meaningfully behind the opponent
-    _V230_REPORT['behind_turns']+=1
-    behind=money+3000<int(obs['farms'][1-player]['money'])
-    if not behind:
-        action=copy.deepcopy(action);action['market']=market
-        return action
-    spending=any(order and order[0] in ('HIRE','BUY_LAND','BUY_PRODUCT','BUY_ANIMAL','BUY_SEED')
-        for order in market)
-    # 1) defer sales into a dumped market, never block our own planned spending.
-    if 12<=day<26 and money>=2000 and not spending:
-        kept=[]
-        for order in market:
-            if (order and order[0]=='SELL' and len(order)>=3 and order[1] in _V230_DEFER_GOODS
-                    and order[1] in prices):
-                series=[price for _,price in hist.get(order[1],[])][-6:]
-                if len(series)>=3:
-                    median=_v230_median(series)
-                    if prices[order[1]]<0.6*median:
-                        _V230_REPORT['price_deferrals']+=1
-                        continue
-            kept.append(order)
-        market=kept
-    # 2) cash-rich cow top-up: one cow every 3 days up to 3 extra animals.
-    topup=state['topup']
-    if (12<=day<=20 and money>=4000 and topup['bought']<3 and day-topup['day']>=3
-            and not any(order and order[0] in ('BUY_ANIMAL','BUY_LAND') for order in market)
-            and len(market)<MAX_ORDERS):
-        animals=obs['farms'][player].get('animals')
-        count=len(animals) if isinstance(animals,list) else None
-        if count is None:
-            structures=obs['farms'][player].get('structures') or {}
-            count=structures.get('herd') if isinstance(structures,dict) else None
-        if count is None or count<23:
-            market.append(['BUY_ANIMAL','COW',1])
-            topup['bought']+=1;topup['day']=day
-            _V230_REPORT['cow_topups']+=1
-        else:
-            _V230_REPORT['cow_topup_declines']+=1
-    action=copy.deepcopy(action);action['market']=market
-    return action
-
-
-def agent(observation,configuration=None):
-    player=int(observation['player'])
-    if int(observation['step'])==0:
-        _V230_HIST.pop(player,None);_V230_STATE.pop(player,None)
-    action=_V230_PARENT(observation,configuration)
-    state=_V230_STATE.setdefault(player,{'topup':{'bought':0,'day':-9}})
-    try:
-        action=_v230_adapt(observation,action,FarmView(observation),state)
-    except Exception:
-        pass
-    _V230_REPORT.update(_V228_REPORT)
-    return action
-
-agent.telemetry=_V230_REPORT
