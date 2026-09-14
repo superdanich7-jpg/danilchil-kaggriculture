@@ -565,3 +565,8 @@ BUY_ANIMAL ордер игнорируется средой. Животново�
 - offline: mengfei tape beats champ wr 0.93 -22k; thirdfarm beats champ wr 0.93 -50k and mengfei +20k.
 - v85 = thirdfarm tape + last-step liquidation wrapper (raw tape under-sells; wrapper fires only step>=719; earlier attempt at 714 double-sold and crashed -120k, reverted).
 - SUBMITTED iter50 (mengfei) and iter51 (v85). Strategy: multiple parallel fresh tapes racing on LB until 09-20.
+
+## 2026-09-14 evening: foreign tapes LB-fail - back to iter47/49 architecture
+- LB reality: ymgaq 582 wr 0.47 (losses -26k), thirdfarm 788 wr 0.33 (-39k), mengfei 892 wr 0.67-0.73. Offline duels on 15 fixed seeds LIED: fresh top tapes are single-seed lucky sessions, not transferable economies.
+- v89 (fert in seat-lead + rubber 2000): parity-worse vs v83 (-1081/40). Rejected.
+- Strategy: rebuild on iter47/49 (our Policy architecture, 1830-1996). Tomorrow: seat-lead v4 experiments (depth by stock), mengfei-style timing learned into OUR advance_sales; 5 submits/day until 09-17, then freeze.

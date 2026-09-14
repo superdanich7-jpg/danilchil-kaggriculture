@@ -35,3 +35,4 @@ date	item	wr_vs_champ	delta	unsold	err	verdict
 2026-09-13`titer49-seat-lead-2t`toffline`tLB-pending`t0`t0.00`tdouble advance when seat=1: mirror wr 0.75 +2.2k/40, cross 1.00 vs haodou/umataro/tk256
 2026-09-14`titer50-mengfei + iter51-thirdfarm`toffline`tLB-pending`t0`t0.00`tfresh 0913 top tapes: mengfei beats iter49 93% (-22k); thirdfarm beats mengfei 93% (+20k); v85=thirdfarm+liquidation
 2026-09-14`titer52-ymgaq`toffline`tLB-pending`t0`t0.00`tymgaq 3016 tape beats mengfei 100% +43k; thirdfarm FAILED on LB (wr 0.33, fragile on foreign seeds); spataro +11k vs mengfei
+2026-09-14`titer52-ymgaq LB: 582 wr 0.47; iter51 wr 0.33; v89 (fert-lead+rubber2k) parity-worse -> REJECTED`toffline`tall fresh foreign tapes LB-fragile; only our architecture (iter49 1830, wr 0.67-0.80) grows steadily`t0`t0.00`tdoc
