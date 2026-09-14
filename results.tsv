@@ -37,3 +37,4 @@ date	item	wr_vs_champ	delta	unsold	err	verdict
 2026-09-14`titer52-ymgaq`toffline`tLB-pending`t0`t0.00`tymgaq 3016 tape beats mengfei 100% +43k; thirdfarm FAILED on LB (wr 0.33, fragile on foreign seeds); spataro +11k vs mengfei
 2026-09-14`titer52-ymgaq LB: 582 wr 0.47; iter51 wr 0.33; v89 (fert-lead+rubber2k) parity-worse -> REJECTED`toffline`tall fresh foreign tapes LB-fragile; only our architecture (iter49 1830, wr 0.67-0.80) grows steadily`t0`t0.00`tdoc
 2026-09-14 evening`titer53=v90 (clone-gate seat-lead)`toffline`tpending (kaggle auth expired mid-submit)`t0`t0.00`tv90 vs iter47: wr 0.75 +1823; v90 vs v16 = verbatim identical; v92 rich-switch added
+2026-09-14 late`titer53=v90+arbitrage`toffline`tLB-pending`t0`t0.00`tmirror wr 0.88 (best ever) +1846/40; vs v16 +153.6k (+3.6k arb); vs random +167.8k; margin-oriented layer

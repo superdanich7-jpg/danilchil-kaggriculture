@@ -577,3 +577,9 @@ BUY_ANIMAL ордер игнорируется средой. Животново�
 - v90: seat-lead gated by clone-detect (opp herd 12-20 at d10); verbatim vs foreign economies (v16 identical to plain).
 - v92: v90 + rich-mirror switch to mengfei tape (opp money > ours x1.3 at d10); neutral vs mirrors in offline test, activates vs strong clones on LB.
 - iter53 submit FAILED: kaggle auth expired. Need user to re-auth (kaggle auth login or new token). Next: submit v90 as iter53, then v92 as iter54.
+
+## 2026-09-14 final: v93 arbitrage = new champion (iter53)
+- margin_scan: our tape-router DOMINATES mengfei (+22/+50/+1k on 3 seeds) - the earlier mengfei-beats-us test was vs OLD v63c base, not the router. Router family is our true strength.
+- v93 = v90 + counter-cyclical arbitrage (<=3% cash, 2 orders, WHEAT/MILK/EGG, buy <0.55x median, sell >1.45x). Pure margin layer, tape untouched, off in endgame (step<648).
+- Results vs iter47-clean (40 seeds): v90 wr 0.75 +1823 -> v93 wr 0.88 +1846. vs v16 +153.6k (+3.6k from arb). vs random +167.8k. SUBMITTED as iter53 (last slot of the day).
+- Rationale per user goal: rating grows on big-margin wins; arbitrage widens every win by 1-4k without touching the tape equilibrium.
