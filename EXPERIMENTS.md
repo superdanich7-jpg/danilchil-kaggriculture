@@ -559,3 +559,9 @@ BUY_ANIMAL ордер игнорируется средой. Животново�
 - v82 (lead 1 turn incl wheat): no effect (wheat log-impact 0.2 -> timing worthless).
 - v83 (lead 2 turns when seat=1): mirror wr 0.75 +2.2k/40 seeds; cross vs haodou/umataro/tk256 wr 1.00 (+63k/+54k/+66k), err=0.
 - SUBMITTED iter49. Next: watch LB; try lead depth 3 and volatility-based depth if it holds.
+
+## 2026-09-14: fresh-top-tape sprint (6 days to deadline)
+- scan 0913 dump: our champ ~50/50 vs top-3000 tapes; three opponents beat us: mengfei 2979, thirdfarm 2923, redblackbst 2941.
+- offline: mengfei tape beats champ wr 0.93 -22k; thirdfarm beats champ wr 0.93 -50k and mengfei +20k.
+- v85 = thirdfarm tape + last-step liquidation wrapper (raw tape under-sells; wrapper fires only step>=719; earlier attempt at 714 double-sold and crashed -120k, reverted).
+- SUBMITTED iter50 (mengfei) and iter51 (v85). Strategy: multiple parallel fresh tapes racing on LB until 09-20.

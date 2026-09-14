@@ -33,3 +33,4 @@ date	item	wr_vs_champ	delta	unsold	err	verdict
 2026-09-12	iter48-rubber-band	offline	LB-pending	0	0.00	parity with champ (wr 0.53, +9/20 seeds); deviation only when behind; v80/v80d/v80t rejected (all lose mirror)
 2026-09-13`titer48-rubber-band`tLB`t1518.5 growing (wr 0.86, L=4 all narrow -0.3k..-7k)`t0`t0.00`tpool of losses = perfect mirrors (herd17 hands11-13, same tape); iter47 aged: wr 0.26 late, mirror roulette
 2026-09-13`titer49-seat-lead-2t`toffline`tLB-pending`t0`t0.00`tdouble advance when seat=1: mirror wr 0.75 +2.2k/40, cross 1.00 vs haodou/umataro/tk256
+2026-09-14`titer50-mengfei + iter51-thirdfarm`toffline`tLB-pending`t0`t0.00`tfresh 0913 top tapes: mengfei beats iter49 93% (-22k); thirdfarm beats mengfei 93% (+20k); v85=thirdfarm+liquidation
