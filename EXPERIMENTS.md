@@ -553,3 +553,9 @@ BUY_ANIMAL ордер игнорируется средой. Животново�
 - iter48 (rubber-band): wr 0.86 over last 29 (24W/4L/1T), wins +20k..+105k, losses all narrow (-322..-7030). Score 1518.5 and climbing; +30/win because rating still below true strength (Elo expectation).
 - iter47 (plain tape) late-phase wr 0.26: pool of Shop-Router clones hardened; losses are perfect mirrors decided by market jitter (herd17 hands11-13, same util%).
 - Conclusion: no new submit; let iter48 mature vs strong pool to test rubber-band where it matters.
+
+## 2026-09-13: iter49 - seat-lead shift (counter-tape vs mirror clones)
+- Forensics: 5 iter48 losses are our own tape clones; makishis +20.7k came from price timing, not volume (sell_vol_compare).
+- v82 (lead 1 turn incl wheat): no effect (wheat log-impact 0.2 -> timing worthless).
+- v83 (lead 2 turns when seat=1): mirror wr 0.75 +2.2k/40 seeds; cross vs haodou/umataro/tk256 wr 1.00 (+63k/+54k/+66k), err=0.
+- SUBMITTED iter49. Next: watch LB; try lead depth 3 and volatility-based depth if it holds.

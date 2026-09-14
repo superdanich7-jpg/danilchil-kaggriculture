@@ -1,10 +1,10 @@
 {
- "file:champ/main.py": {
-  "wr": 0.525,
-  "delta": 9.0,
+ "file:bots/opp_umataro.py": {
+  "wr": 1.0,
+  "delta": 54354.26666666667,
   "unsold": 0.0,
-  "ocoins": 90628.25,
+  "ocoins": 57519.066666666666,
   "err": 0.0,
-  "sec": 6.752083361148834
+  "sec": 7.386022917429606
  }
 }
