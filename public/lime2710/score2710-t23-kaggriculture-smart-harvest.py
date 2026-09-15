@@ -2876,3 +2876,19 @@ agent=globals().pop('agent')
 # The Code page runs this script once and exposes its archive as a kernel
 # output.  Kaggriculture consumes that archive as the actual competition
 # agent; importing this file for a match does not execute this packaging block.
+if __name__ == "__main__":
+    import io as _code_io
+    import pathlib as _code_pathlib
+    import tarfile as _code_tarfile
+
+    _code_source = _code_pathlib.Path(__file__).read_bytes()
+    with _code_tarfile.open("submission.tar.gz", "w:gz") as _code_archive:
+        _code_info = _code_tarfile.TarInfo("main.py")
+        _code_info.size = len(_code_source)
+        _code_info.mtime = 0
+        _code_info.mode = 0o644
+        _code_archive.addfile(_code_info, _code_io.BytesIO(_code_source))
+    print(
+        "Scored Kaggriculture agent archive ready: "
+        f"main.py ({len(_code_source):,} bytes) -> submission.tar.gz"
+    )
